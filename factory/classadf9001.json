@@ -1,0 +1,17 @@
+{
+	"name": "classadf9001",
+	"properties": {
+		"globalParameters": {
+			"WebLink": {
+				"type": "string",
+				"value": "url"
+			}
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e61efa9a-1b21-4ae7-b5d6-c223b7899253",
+		"tenantId": "f09d1304-d09b-4639-9feb-48869295d1b4"
+	}
+}

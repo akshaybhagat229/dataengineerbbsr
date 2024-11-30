@@ -1,0 +1,30 @@
+{
+	"name": "new_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Notebook1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/project/DEtype2/practice"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks28112025",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-11-28T15:36:25Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

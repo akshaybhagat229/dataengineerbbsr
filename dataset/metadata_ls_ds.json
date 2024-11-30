@@ -1,0 +1,38 @@
+{
+	"name": "metadata_ls_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls_raw_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "metadata.csv",
+				"folderPath": "raw",
+				"fileSystem": "classproject"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Supplier",
+				"type": "String"
+			},
+			{
+				"name": "OrigColumn",
+				"type": "String"
+			},
+			{
+				"name": "MapColumn",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

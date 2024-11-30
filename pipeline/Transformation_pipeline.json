@@ -1,0 +1,126 @@
+{
+	"name": "Transformation_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup metadata information",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "@concat('select * from dbo.metadata where Supplier = ''', pipeline().parameters.Supplier, '''')\n",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "sql_db_ls",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Transformation Notebook",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Lookup dataflow information",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": {
+						"value": "@concat('/Users/abhishekv8668@gmail.com/', activity('Lookup dataflow information').output.value[0].notebook)\n",
+						"type": "Expression"
+					},
+					"baseParameters": {
+						"validationRules": {
+							"value": "@string(activity('Lookup metadata information').output.value)",
+							"type": "Expression"
+						},
+						"filename": {
+							"value": "@pipeline().parameters.fileName",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "Azure_LS",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Lookup dataflow information",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Lookup metadata information",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "@concat('select notebook from dbo.dataflow where isactive = ''Y''')\n",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "sql_db_ls",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
+		"parameters": {
+			"Supplier": {
+				"type": "string"
+			},
+			"fileName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Project"
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-11-25T16:38:50Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

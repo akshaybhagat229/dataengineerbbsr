@@ -1,0 +1,32 @@
+{
+	"name": "Packing",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Name",
+					"value": "Akshay"
+				}
+			}
+		],
+		"variables": {
+			"Name": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "packing"
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-11-20T06:29:11Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
