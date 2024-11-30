@@ -1,0 +1,28 @@
+{
+	"name": "masterbench_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "give Name",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Name",
+					"value": "Shubham"
+				}
+			}
+		],
+		"variables": {
+			"Name": {
+				"type": "String",
+				"defaultValue": "Shubham"
+			}
+		},
+		"annotations": []
+	}
+}
